@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+  <!--
+    - Developed By Tony Kulaei - September 10, 2022
+    - Github : https://github.com/slashTony
+    - Update : September 12, 2022
+  -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&lt; Axinote /&gt;</title>
+    <!--Ubuntu Fonts From https://github.com/ubuntu/font-ubuntu-->
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700,300italic,400italic,500italic,700italic'>
+    <style>
+       
+:root{
+  --header-height: 64px;
+  --footer-height: 64px;
+  --header-footer-margin: 60px;
+  --main-max-width: 750px;
+  --nav-max-width: 1024px;
+  --gap: 24px;
+  --radius: 8px;
+  
+
+  --theme-body-background: rgb(248,248,248);
+  --theme-text-color: rgb(46, 46, 51);
+  --theme-color-black: rgb(10,10,10);
+  --theme-color-white: rgb(255,255,255);
+  --theme-color-blue: rgb(39,104,254);
+  --theme-color-darkblue: rgb(39,90,220);
+  --theme-color-red: rgb(240,30,30);
+  --theme-color-green: rgb(50,200,0);
+  --theme-color-yellow: rgb(245, 235, 0);
+  --theme-color-orange: rgb(245, 150, 0);
+  --theme-color-graphit: rgb(46, 47, 51);
+  --theme-color-gray: rgb(100,100,100);
+  --theme-color-gray-90: rgb(120,120,120);
+  --theme-color-gray-80: rgb(140,140,140);
+  --theme-color-gray-70: rgb(160,160,160);
+  --theme-color-gray-60: rgb(180,180,180);
+  --theme-color-gray-50: rgb(200,200,200);
+  --theme-color-gray-40: rgb(220,220,220);
+  --theme-color-gray-30: rgb(240,240,240);
+  --theme-color-gray-20: rgb(248,248,248);
+}
+:root[data-theme="dark"]{
+  --theme-body-background: rgb(38, 40, 43);
+  --theme-text-color: rgb(230,230,230);
+  --theme-color-black: rgb(255,255,255);
+  --theme-color-white: rgb(31, 32, 34);
+  --theme-color-blue: rgb(39,124,254);
+  --theme-color-graphit: rgb(122, 126, 141);
+  --theme-color-gray: rgb(100,100,100);
+  --theme-color-gray-90: rgb(120,120,120);
+  --theme-color-gray-80: rgb(140,140,140);
+  --theme-color-gray-70: rgb(160,160,160);
+  --theme-color-gray-60: rgb(180,180,180);
+  --theme-color-gray-50: rgb(200,200,200);
+  --theme-color-gray-40: rgb(220,220,220);
+  --theme-color-gray-30: rgb(20, 21, 22);/*borders and buttons*/
+  --theme-color-gray-20: rgb(248,248,248);
+}
+
+
+html{
+  scroll-behavior: smooth;
+}
+
+
+body{
+  width: 100%;
+  height: 100%;
+  margin: 0%;
+  background-color: var(--theme-body-background);
+  color: var(--theme-text-color);
+  overflow-y: auto;
+  overflow-x: hidden;
+  line-height: 1.8;
+  font-family: ubuntu, Roboto;
+  word-break: break-word;
+  direction: ltr;
+  /*direction: rtl;*/
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: ubuntu, Roboto;
+}
+
+
+
+
+/*::selection{
+  background-color: var(--theme-color-blue);
+  color: var(--theme-color-white)
+}*/
+
+
+a{
+  text-decoration: none;
+  color: var(--theme-color-blue);
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+  display: block;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--theme-text-color);
+  line-height: 1.2;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+strong,
+b {
+  font-weight: 700;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/*========================= header =========================*/
+.header{
+  display: block;
+  position: sticky;
+  position: -webkit-sticky;/*For Safari Browser*/
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  height: auto;
+  background-color: var(--theme-color-white);
+  box-shadow: 0px 5px 10px rgba(39,104,254, 0.15);
+  z-index: 9999;
+}
+:root[data-theme="dark"] .header{
+  box-shadow: 0px 5px 10px rgba(230,230,230, 0.1);
+}
+.header .nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: auto;
+  max-width: calc(var(--nav-max-width) + var(--gap)*2);
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.header .nav .logo{
+  width: auto;
+  height: var(--header-height);
+  font-size: 24px;
+  font-weight: 700;
+  display: inline-block;
+  color: var(--primary);
+  margin: 0px;
+  margin-left: var(--gap);
+  margin-right: var(--gap);
+  line-height: var(--header-height);
+}
+.header .nav .logo a{
+  color: var(--theme-color-blue);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header .nav .menu{
+  display: inline-block;
+  width: auto;
+  height: var(--header-height);
+  margin-left: var(--gap);
+  margin-right: var(--gap);
+  line-height: 80px;
+}
+.header .nav .menu .item{
+  display: inline-block;
+  width: auto;
+  height: var(--header-height);
+  padding: 0px calc(var(--gap) / 2);
+  line-height: 80px;
+}
+.header .nav .menu .item svg{
+  width: 24px;
+  height: 24px;
+  stroke-width: 1px;
+  stroke: var(--theme-color-blue);
+  fill: var(--theme-color-blue);
+}
+:root[data-theme="dark"] .header .nav .menu .item svg{
+  stroke: var(--theme-color-graphit);
+  fill: var(--theme-color-graphit);
+}
+.header .nav .menu .item:hover svg{
+  stroke: var(--theme-color-darkblue);
+  fill: var(--theme-color-darkblue);
+  transform: scale(1.06);
+}
+/*========================= header =========================*/
+
+
+/*========================= main =========================*/
+.main{
+  position: relative;
+  max-width: calc(var(--main-max-width) + var(--gap) * 2);
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--header-footer-margin)*1);
+  margin-top: var(--header-footer-margin);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: var(--radius);
+  padding: calc(var(--gap) - 10px);
+  /*background-color: var(--theme-color-white);*/
+  /*box-shadow: 0px 0px 20px rgba(60,60,60, 0.15);*/
+  /*border: 1px solid var(--theme-color-gray-30);*/
+}
+
+.main .title{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.main .title .note-title-text{
+  display: inline;
+  vertical-align: bottom;
+  font-size: 40px;
+  color: var(--theme-text-color);
+  margin-top: 0px;
+  max-width: calc(100% - 149px);
+}
+.main .title .add-button{
+  display: inline-block;
+  vertical-align: bottom;
+  width: 139px;
+  height: 48px;
+  padding: 0px 10px;
+  margin-left: 10px;
+  border-radius: var(--radius);
+  color: var(--theme-color-blue);
+  background-color: var(--theme-color-white);
+  border: 1px solid var(--theme-color-gray-30);
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(39,104,254, 0.15);
+}
+.main .title .add-button span{
+  display: inline-block;
+}
+.main .title .add-button svg{
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  stroke: var(--theme-color-blue);
+  stroke-width: 1px;
+  fill: var(--theme-color-blue);
+}
+.main .title .add-button:hover{
+  color: var(--theme-color-white);
+  background-color: var(--theme-color-blue);
+}
+.main .title .add-button:hover svg{
+  stroke: var(--theme-color-white);
+  fill: var(--theme-color-white);
+}
+:root[data-theme="dark"] .main .title .add-button{
+  --theme-color-blue: var(--theme-color-graphit);
+  box-shadow: 0px 0px 10px rgba(10,10,10, 0.07);
+}
+
+#searchInput{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 65px);
+  height: 50px;
+  padding: 10px 30px;
+  margin-bottom: 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--theme-color-gray-30);
+  background-color: var(--theme-color-white);
+  color: var(--theme-color-black);
+  font-size: 18px;
+  font-weight: normal;
+  outline: none;
+  unicode-bidi: plaintext;
+  text-align: start;
+  box-shadow: 0px 0px 10px rgba(120, 120, 120, 0.05);
+  transition: 100ms;
+}
+#searchInput:focus{
+  box-shadow: 0px 0px 10px rgba(120, 120, 120, 0.14);
+}
+
+#searchModeButton{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+  border-radius: var(--radius);
+  background-color: var(--theme-color-white);
+  color: var(--theme-color-black);
+  border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(120, 120, 120, 0.1);
+}
+#searchModeButton::before{
+  content: "!?";
+  text-align: center;
+}
+
+.main .labels-list{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+  background-color: transparent;
+}
+.main .labels-list .label{
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 7px 12px;
+  margin: 5px;
+  border-radius: var(--radius);
+  background-color: var(--theme-color-gray-30);
+  color: var(--theme-text-color);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+.main .labels-list .label:hover{
+  background-color: var(--theme-color-gray-40);
+}
+:root[data-theme="dark"] .main .labels-list .label{
+  --theme-color-gray-40: rgb(62, 69, 75);
+}
+
+.main .note-list{
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+}
+.main .note-list:empty::before{
+  display: block;
+  content: "No Notes yet!";
+  color: var(--theme-color-gray-70);
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+  justify-content: center;
+}
+.main .note-list .note{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: var(--radius);
+  background-color: var(--theme-color-white);
+  color: var(--theme-text-color);
+  box-shadow: 0px 0px 10px rgba(120, 120, 120, 0.05);
+  border: 1px solid var(--theme-color-gray-30);
+  unicode-bidi: plaintext;
+  text-align: start;
+  overflow: hidden;
+}
+.main .note-list .note .note-id{
+  position: absolute;
+  top: -3px;
+  left: 5px;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  color: var(--theme-color-gray-40);
+  font-size: 13px;
+  font-weight: bold;
+  /*transform: rotate(90deg);*/
+}
+:root[data-theme="dark"] .main .note-list .note .note-id{
+  color: var(--theme-color-graphit);
+}
+.main .note-list .note .note-id::before{
+  content: "~";
+}
+.main .note-list .note .title{
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+.main .note-list .note .content{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  color: var(--theme-text-color);
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+:root[data-theme="dark"] .main .note-list .note .content{
+  color: var(--theme-color-gray-60);
+}
+.main .note-list .note .content .code-block{
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 60px;
+  padding: 16px 16px;
+  border-radius: var(--radius);
+  background-color: var(--theme-color-gray-20);
+  color: var(--theme-color-blue);
+  border: 1px solid var(--theme-color-gray-30);
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.2mm;
+  word-spacing: 0.4mm;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+:root[data-theme="dark"] .main .note-list .note .content .code-block{
+  background-color: var(--theme-color-gray-30);
+  color: var(--theme-color-graphit);
+}
+.main .note-list .note .content .code-block .copy-code-button{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: none;
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  border: 0px;
+  border-radius: var(--radius);
+  background-color: var(--theme-color-gray-50);
+  color: var(--theme-color-gray-30);
+  font-size: 15px;
+  font-weight: normal;
+  outline: none;
+  cursor: pointer;
+}
+.main .note-list .note .content .code-block .copy-code-button::before{
+  content: "C";
+}
+.main .note-list .note .content .code-block:hover .copy-code-button,
+.main .note-list .note .content .code-block:active .copy-code-button{
+  display: block;
+}
+.main .note-list .note .content .code-block .copy-code-button:hover,
+.main .note-list .note .content .code-block .copy-code-button:active{
+  background-color: var(--theme-color-graphit);
+}
+.main .note-list .note .content h1{
+  font-size: 22px;
+  font-weight: bold;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+:root[data-theme="dark"] .main .note-list .note .content h1{
+  color: var(--theme-text-color);
+}
+.main .note-list .note .content h2{
+  font-size: 19px;
+  font-weight: bold;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+.main .note-list .note .content h3{
+  font-size: 17px;
+  font-weight: bold;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+:root[data-theme="dark"] .main .note-list .note .content h1,
+:root[data-theme="dark"] .main .note-list .note .content h2,
+:root[data-theme="dark"] .main .note-list .note .content h3{
+  color: var(--theme-text-color);
+}
+.main .note-list .note .content p{
+  color: var(--theme-text-color);
+  font-size: 16px;
+  font-weight: normal;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+:root[data-theme="dark"] .main .note-list .note .content p{
+  color: var(--theme-color-gray-60);
+}
+.main .note-list .note .content img{
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.main .note-list .note .content ul{
+  padding-left: 40px;
+  padding-right: 40px;
+  line-height: 1.5;
+}
+.main .note-list .note .note-labels{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  margin-top: 30px;
+}
+.main .note-list .note .note-labels:empty{
+  margin-top: 0px;
+}
+.main .note-list .note .note-labels .label{
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 7px 12px;
+  margin: 5px;
+  border-radius: 4px;
+  background-color: transparent;
+  color: var(--theme-color-blue);
+  border: 1px solid var(--theme-color-blue);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+.main .note-list .note .note-labels .label:hover{
+  border: 1px solid var(--theme-color-red);
+  color: var(--theme-color-red);
+}
+.main .note-list .note .note-footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 5px;
+  background-color: transparent;
+  border-top: 1px solid var(--theme-color-gray-30);
+}
+.main .note-list .note .note-footer .action-button{
+  display: block;
+  width: auto;
+  height: auto;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: var(--radius);
+  background-color: var(--theme-color-gray-30);
+  color: var(--theme-color-graphit);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  border: 0px;
+  outline: none;
+  cursor: pointer;
+  word-break: keep-all;
+}
+.main .note-list .note .note-footer .action-button:hover{
+  color: var(--theme-color-white);
+  background-color: var(--theme-color-darkblue);
+}
+.main .note-list .note .note-footer .delete:hover{
+  color: var(--theme-color-white);
+  background-color: var(--theme-color-red);
+}
+:root[data-theme="dark"] .main .note-list .note-footer .action-button{
+  --theme-color-white: rgb(255,255,255);
+}
+.main .note-list .note .note-footer .edit-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+.main .note-list .note .note-footer .edit-container .action-button:hover{
+  color: var(--theme-color-white);
+  background-color: var(--theme-color-graphit);
+}
+/*========================= main =========================*/
+
+/*======================== footer ========================*/
+.footer{
+  display: block;
+  width: 100%;
+  height: var(--footer-height);
+  margin-top: var(--header-footer-margin);
+  text-align: center;
+  line-height: var(--footer-height);
+}
+.footer span{
+  width: auto;
+  height: auto;
+  margin-left: 1px;
+  margin-right: 1px;
+  color: var(--theme-color-blue);
+  font-size: 14px;
+}
+/*======================== footer ========================*/
+
+
+.notif-list{
+  position: fixed;
+  display: block;
+  bottom: 10px;
+  right: 20px;
+  width: 400px;
+  height: auto;
+  max-width: calc(100% - 35px);
+  background-color: transparent;
+  z-index: 99;
+}
+
+.notif-list .notification{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  border: 0px;
+  border-radius: 4px;
+  background-color: var(--theme-color-graphit);
+  box-shadow: 0px 0px 10px rgba(10,10,10,0.4);
+  cursor: pointer;
+  border-left: 4px solid var(--theme-color-red);
+  transition: 200ms;
+}
+:root[data-theme="dark"] .notif-list .notification{
+  --theme-color-graphit: rgb(23, 24, 26);
+}
+.notif-list .notification:hover{
+  transform: scale(1.05);
+}
+.notif-list .notification .title{
+  position: relative;
+  width: calc(100% + 30px);
+  height: auto;
+  padding: 4px 8px;
+  margin-top: -10px;
+  margin-left: -15px;
+  border-radius: var(--radius);
+  background-color: transparent;
+  color: var(--theme-color-gray-70);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.notif-list .notification .text-content{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  color: var(--theme-color-gray-20);
+  font-size: 16px;
+  font-weight: normal;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+.notif-list .notification .text-content a{
+  color: var(--theme-color-blue);
+  font-weight: bold;
+}
+
+#info-saver{
+  display: none;
+}
+
+@media (max-width: 387px){
+  .main{
+    margin-top: calc(var(--header-footer-margin) + 60px);
+  }
+}
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <div class="logo">&lt; Axinote /&gt;</div>
+        <div class="menu">
+          <a class="item" title="New Note" onclick="newNote('New note');">
+            <svg>
+              <path d="M 20 2 L 22 3 L 14 19 L 12 20 L 12 18 L 20 2 M 11 20 C 8 18 4 22 0 20 M 11 16 C 7 14 4 18 0 16 M 12 12 C 8 10 4 14 0 12 M 13 8 C 9 6 4 10 0 8 M 0 6 L 0 0 L 16 0 L 16 1 L 1 1 L 1 6 Z"></path>
+            </svg>
+          </a>
+          <a class="item" title="Switch to Dark Theme" onclick="switchTheme(this);">
+            <svg>
+              <path style="display: none;" d="M 11 6 C 3 6 3 18 11 18 C 19 18 19 6 11 6 M 7 5 L 4 2 M 15 5 L 18 2 M 11 4 L 11 1 M 7 19 L 4 22 M 15 19 L 18 22 M 11 20 L 11 23 M 19 12 L 22 12 M 3 12 L 0 12 M 4 8 L 1 6 M 18 8 L 21 6 M 18 16 L 21 18 M 4 16 L 1 18 Z"></path>
+              <path style="display: block;" d="M 6 2 C 4 11 11 20 22 19 C 5 30 -3 11 6 2 Z"></path>
+            </svg>
+          </a>
+          <a class="item" title="Save" onclick="save();">
+            <svg>
+              <path d="M 11 3 L 11 15 L 12 15 L 12 3 L 11 3 M 7 12 L 6 12 L 11.648 18.419 L 17 12 L 16 12 L 11.552 17.113 L 7 12 M 5 21 L 19 21 L 19 22 L 5 22 Z"></path>
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+
+    <main class="main">
+
+      <!--JSON.parse(document.getElementById("info-saver").textContent)-->
+      <div id="info-saver">{
+        "id-counter":0,
+        "theme":"light"
+      }
+      </div>
+
+      <div class="title">
+        <h1 class="note-title-text">&lt; Axinote /&gt;</h1>
+        <button class="add-button" onclick="newNote('New note');">
+          <span>New note</span>
+          <svg>
+            <path d="M 17 10 L 21 10 L 21 17 L 28 17 L 28 21 L 21 21 L 21 28 L 17 28 L 17 21 L 12 21 L 8 17 L 17 17 L 17 10 Z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <input id="searchInput" type="text" oninput="search();" placeholder="Search in notes...">
+      <button id="searchModeButton" title="Search mode | any used word in note" onclick="searchModeSwitcher();">*</button>
+
+      <div class="labels-list">
+        <a class="label" href="#">Example label</a>
+      </div>
+
+      <div id="notes-list" class="note-list"></div>
+
+    </main>
+
+    <footer class="footer">
+      <span>&copy;<a href="https://github.com/slashtony/slashnote"> 2022 Slash Note</a> <small>Version 1.4.7</small></span>
+    </footer>
+
+    <!--Small Checks-->
+    <script>
+      window.search_mode = "any used word"; // "all used words" or "any used word"
+      var note_name = window.location.href.split("/").slice(-1).toString().split("#")[0];
+      document.getElementsByClassName("note-title-text")[0].textContent = note_name;
+    </script>
+
+
+    <!--Theme Control-->
+    <script>
+      function switchTheme(elem){
+        var current_theme = document.getElementsByTagName("html")[0].getAttribute("data-theme");
+        if (current_theme == null || current_theme == "light"){
+          document.getElementsByTagName("html")[0].setAttribute("data-theme", "dark");
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[0].style.display = "block";
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[1].style.display = "none";
+          elem.title = "Switch To Light Theme";
+          var settings = JSON.parse(document.getElementById("info-saver").textContent);
+          settings["theme"] = "dark";
+          document.getElementById("info-saver").textContent = JSON.stringify(settings);
+        }else{
+          document.getElementsByTagName("html")[0].setAttribute("data-theme", "light");
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[0].style.display = "none";
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[1].style.display = "block";
+          elem.title = "Switch To Dark Theme";
+          var settings = JSON.parse(document.getElementById("info-saver").textContent);
+          settings["theme"] = "light";
+          document.getElementById("info-saver").textContent = JSON.stringify(settings);
+        }
+      }
+      function setThemeOnLaunch(){
+        var settings = JSON.parse(document.getElementById("info-saver").textContent);
+        var elem = document.getElementsByClassName("menu")[0].getElementsByClassName("item")[1];
+
+        if (settings["theme"] == "light"){
+          document.getElementsByTagName("html")[0].setAttribute("data-theme", "light");
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[0].style.display = "none";
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[1].style.display = "block";
+          elem.title = "Switch To Dark Theme";
+        }else{
+          document.getElementsByTagName("html")[0].setAttribute("data-theme", "dark");
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[0].style.display = "block";
+          elem.getElementsByTagName("svg")[0].getElementsByTagName("path")[1].style.display = "none";
+          elem.title = "Switch To Light Theme";
+        }
+      }
+      setThemeOnLaunch();
+    </script>
+
+
+    <!--Save-->
+    <script>
+      async function save(){
+        while (document.getElementById("notif-list").children.length != 0){
+          await sleep(500);
+        }
+        var htmlContent = document.getElementsByTagName("html")[0].innerHTML;
+        htmlContent = ["<!DOCTYPE html>\n"+"<html lang=\"en\">\n"+htmlContent+"\n</html>"];
+        var bl = new Blob(htmlContent, {type: "text/html"});
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(bl);
+        a.download = note_name;
+        a.hidden = true;
+        document.body.appendChild(a);
+        a.innerHTML = "something random - nobody will see this, it doesn't matter what you put here";
+        a.click();
+      }
+    </script>
+
+    <!--Search-->
+    <script>
+      function labelToSearchInput(elem){
+        document.getElementById("searchInput").value = elem.textContent;
+        document.getElementById("searchInput").focus();
+        send_notif("search!", "Type a space to search label", "info", 5000);
+      }
+
+      function search(){
+        var value = document.getElementById("searchInput").value.trim();
+        for (let note of document.getElementsByClassName("note")){
+
+          var texts = note.getAttribute("title")
+          + note.getElementsByClassName("title")[0].textContent
+          + note.getElementsByClassName("content")[0].textContent
+          + note.getElementsByClassName("note-labels")[0].textContent;
+
+          var words = value.split(" ");
+          var score = 0;
+          for (let word of words){
+            if (word.trim() != "" || value == ""){
+              if (texts.toLowerCase().indexOf(word.toLowerCase()) != -1){
+                score++
+              }else{
+                if (window.search_mode == "all used words"){
+                  score--
+                }
+              }
+            }
+          }
+          
+          if (window.search_mode == "all used words"){
+            if (score == words.length){
+              note.style.display = "block";  
+            }else{
+            note.style.display = "none";
+            }
+          }else{
+            if (score > 0){
+              note.style.display = "block";
+            }else{
+              note.style.display = "none";
+            }
+          }
+        }
+      }
+      function searchModeSwitcher(){
+        // "all used words" or "any used word"
+        if (window.search_mode == "any used word"){
+          window.search_mode = "all used words";
+          document.getElementById("searchModeButton").title = "Search mode | all used words must be in note";
+          document.getElementById("searchModeButton").textContent = "+";
+        }else{
+          window.search_mode = "any used word";
+          document.getElementById("searchModeButton").title = "Search mode | any used word be in note";
+          document.getElementById("searchModeButton").textContent = "*";
+        }
+      }
+    </script>
+
+
+    <!--Labels-->
+    <script>
+      function addLabel(elem){
+        var label_text = prompt("Enter label");
+        if (label_text.trim() != "" && label_text.indexOf("#") == -1){
+          var label = document.createElement("a");
+          label.className = "label";
+          label.textContent = "#"+label_text;
+          label.title = "Click to remove";
+          label.setAttribute("onclick", "removeLabel(this);");
+          elem.parentElement.parentElement.parentElement.getElementsByClassName("note-labels")[0].appendChild(label);
+          send_notif("Label added", "Label <b>\"#"+label_text+"\"</b> added to note.", "info", 5000);
+        } else{
+          send_notif("Error adding label", "\"#\" is not allowed in labels. Or maybe there is nothing to add!", "error", 5000);
+        }
+        checkLabels();
+
+      }
+      function removeLabel(elem){
+        var confirm = prompt("Confirm label deleting with \"yes\"");
+        if (confirm == "yes"){
+          elem.remove();
+          checkLabels();
+        }
+      }
+
+      function checkLabels(){
+        var labels = Array()
+        for (let note of document.getElementsByClassName("note")){
+          try{
+            var note_labels = note.getElementsByClassName("note-labels")[0].textContent;
+            var splited_note_label = note_labels.split("#")
+            for (let label of splited_note_label){
+              labels.push(label);
+            }
+          }catch(err){}
+        }
+        function onlyUnique(value, index, self) {
+          return self.indexOf(value) === index;
+        }
+        
+        document.getElementsByClassName("labels-list")[0].innerHTML = "";
+
+        var unique_labels = labels.filter(onlyUnique);
+        for (let label of unique_labels){
+          if (label.trim() != ""){
+            var label_elem = document.createElement("a");
+            label_elem.className = "label";
+            label_elem.textContent = "#"+label;
+            label_elem.setAttribute("onclick", "labelToSearchInput(this);");
+            document.getElementsByClassName("labels-list")[0].appendChild(label_elem);
+          }
+        }
+      }
+      checkLabels();
+    </script>
+
+
+    <!--Note Actions-->
+    <script>
+      function getLink(){
+        return prompt("Enter Link or hashtag or point to a note like #note(n), #note3, #note20");
+      }
+      function getImage(){
+        return prompt("Enter image link");
+      }
+      function copyCode(elem){
+        navigator.clipboard.writeText(elem.parentElement.innerText);
+        send_notif("Clipboard", "Code copied to clipboard.", "info", 3000);
+      }
+
+      function getMakeListContent(){
+        var value = prompt("Enter List items, seperate them with ## or press enter to create list");
+        if (value != null){
+          var list_items = value.split("##").map(element => element.trim());
+          var the_html = "<ul>";
+          for (let item of list_items){
+            the_html += "<li>"+item+"</li>";
+          }
+          the_html += "</ul>";
+          return the_html;
+        }else{
+          return "";
+        }
+      }
+      function changeBlockAlignment(){
+        var elem = window.getSelection().anchorNode.parentElement;
+        if (elem.style.direction == "ltr"){
+          elem.style.direction = "rtl";
+        } else if (elem.style.direction == "rtl"){
+          elem.style.direction = "ltr";
+        }else{
+          elem.style.direction = "ltr";
+        }
+      }
+    </script>
+
+
+    <!--note Edit Script-->
+    <script>
+      async function editNote(elem){
+        //elem.parentElement.parentElement.setAttribute("contenteditable", true);
+        if (elem.parentElement.parentElement.getAttribute("on-edit-mode") == null){
+          elem.textContent = "Submit Edit";
+          elem.parentElement.parentElement.setAttribute("on-edit-mode", true);
+
+          for (let child of elem.parentElement.parentElement.children){
+            if (child.classList.contains("content") || child.classList.contains("title")){
+              
+                child.setAttribute("contenteditable", true);
+
+                if (child.classList.contains("content")){
+                  child.style = "max-height: 300px; overflow-y: auto;";
+                }
+                
+            } else if (child.classList.contains("note-footer")){
+
+              var edit_container = document.createElement("div");
+              edit_container.className = "edit-container";
+              child.appendChild(edit_container);
+
+              var edit_bold_button = document.createElement("button");
+              edit_bold_button.className = "action-button";
+              edit_bold_button.textContent = "Bold";
+              edit_bold_button.title = "Make selected text Bold";
+              edit_bold_button.setAttribute("edit-mode-button", true);
+              edit_bold_button.setAttribute("onclick", "document.execCommand('bold', false, null);");
+              edit_container.appendChild(edit_bold_button);
+              /*document.execCommand('formatBlock', false, '<H1>');
+              document.execCommand('formatBlock', false, '<p>');*/
+              var edit_italic_button = document.createElement("button");
+              edit_italic_button.className = "action-button";
+              edit_italic_button.textContent = "Italic";
+              edit_italic_button.title = "Make selected text Italic";
+              edit_italic_button.setAttribute("edit-mode-button", true);
+              edit_italic_button.setAttribute("onclick", "document.execCommand('italic', false, null);");
+              edit_container.appendChild(edit_italic_button);
+
+              var edit_underline_button = document.createElement("button");
+              edit_underline_button.className = "action-button";
+              edit_underline_button.textContent = "Underline";
+              edit_underline_button.title = "Make selected text Underlined";
+              edit_underline_button.setAttribute("edit-mode-button", true);
+              edit_underline_button.setAttribute("onclick", "document.execCommand('underline', false, null)");
+              edit_container.appendChild(edit_underline_button);
+
+              var edit_h1_button = document.createElement("button");
+              edit_h1_button.className = "action-button";
+              edit_h1_button.textContent = "Header 1";
+              edit_h1_button.title = "Make selected text large header";
+              edit_h1_button.setAttribute("edit-mode-button", true);
+              edit_h1_button.setAttribute("onclick", "document.execCommand('formatBlock', false, '<h1>')");
+              edit_container.appendChild(edit_h1_button);
+
+              var edit_h2_button = document.createElement("button");
+              edit_h2_button.className = "action-button";
+              edit_h2_button.textContent = "Header 2";
+              edit_h2_button.title = "Make selected text Medium header";
+              edit_h2_button.setAttribute("edit-mode-button", true);
+              edit_h2_button.setAttribute("onclick", "document.execCommand('formatBlock', false, '<h2>')");
+              edit_container.appendChild(edit_h2_button);
+
+              var edit_h3_button = document.createElement("button");
+              edit_h3_button.className = "action-button";
+              edit_h3_button.textContent = "Header 3";
+              edit_h3_button.title = "Make selected text small header";
+              edit_h3_button.setAttribute("edit-mode-button", true);
+              edit_h3_button.setAttribute("onclick", "document.execCommand('formatBlock', false, '<h3>')");
+              edit_container.appendChild(edit_h3_button);
+
+              var edit_p_button = document.createElement("button");
+              edit_p_button.className = "action-button";
+              edit_p_button.textContent = "Paragraph";
+              edit_p_button.title = "Make selected text simple paragraph";
+              edit_p_button.setAttribute("edit-mode-button", true);
+              edit_p_button.setAttribute("onclick", "document.execCommand('formatBlock', false, '<p>')");
+              edit_container.appendChild(edit_p_button);
+
+              var edit_anchor_button = document.createElement("button");
+              edit_anchor_button.className = "action-button";
+              edit_anchor_button.textContent = "Insert Link";
+              edit_anchor_button.title = "Turn selected text to link or hashtag";
+              edit_anchor_button.setAttribute("edit-mode-button", true);
+              edit_anchor_button.setAttribute("onclick", "document.execCommand('createLink', false, getLink())");
+              edit_container.appendChild(edit_anchor_button);
+
+              var edit_image_button = document.createElement("button");
+              edit_image_button.className = "action-button";
+              edit_image_button.textContent = "Insert Image";
+              edit_image_button.title = "Insert image in cursor position";
+              edit_image_button.setAttribute("edit-mode-button", true);
+              edit_image_button.setAttribute("onclick", "document.execCommand('insertImage', false, getImage())");
+              edit_container.appendChild(edit_image_button);
+
+              var edit_insert_code_block_button = document.createElement("button");
+              edit_insert_code_block_button.className = "action-button";
+              edit_insert_code_block_button.textContent = "Insert Code Block";
+              edit_insert_code_block_button.title = "Insert Code Block in cursor position";
+              edit_insert_code_block_button.setAttribute("onclick", "execCommand('insertHTML', false, '<pre class=\"code-block\"><button class=\"copy-code-button\" contenteditable=\"false\" onclick=\"copyCode(this);\"></button></pre><br><br>')");
+              edit_container.appendChild(edit_insert_code_block_button);
+
+              var edit_insert_list_button = document.createElement("button");
+              edit_insert_list_button.className = "action-button";
+              edit_insert_list_button.textContent = "Insert list";
+              edit_insert_list_button.title = "Insert a list of items";
+              edit_insert_list_button.setAttribute("onclick", "document.execCommand('insertHTML', false, getMakeListContent());");
+              edit_container.appendChild(edit_insert_list_button);
+
+              var edit_align_block_button = document.createElement("button");
+              edit_align_block_button.className = "action-button";
+              edit_align_block_button.textContent = "Alignment";
+              edit_align_block_button.title = "Align text block  to left or right";
+              edit_align_block_button.setAttribute("onclick", "changeBlockAlignment()");
+              edit_container.appendChild(edit_align_block_button);
+
+              var edit_add_label_button = document.createElement("button");
+              edit_add_label_button.className = "action-button";
+              edit_add_label_button.textContent = "Add label";
+              edit_add_label_button.title = "Add new label to group note";
+              edit_add_label_button.setAttribute("onclick", "addLabel(this);");
+              edit_container.appendChild(edit_add_label_button);
+
+              // https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+
+            }
+          }
+          var note_id = elem.parentElement.parentElement.id
+          send_notif("Edit mode", "Edit mode enabled for note <a href='#"+note_id+"'>"+"#"+note_id+"<a>", "info", 5000);
+
+        }else{
+
+          elem.parentElement.parentElement.removeAttribute("on-edit-mode");
+
+          var datetime = new Date();
+          var datetime_string = datetime.toString();
+          var created = elem.parentElement.parentElement.title.split("Modified")[0];
+          elem.parentElement.parentElement.title = created + "Modified: "+ datetime_string;
+
+          elem.textContent = "Edit Note";
+          for (let child of elem.parentElement.parentElement.children){
+            child.setAttribute("contenteditable", false);
+
+            if (child.classList.contains("note-footer")){
+              child.getElementsByClassName("edit-container")[0].remove();
+            }
+            if (child.classList.contains("content")){
+              child.style = "";
+            }
+
+          }
+          send_notif("Save warning", "Some changed have been made make sure to save changes.", "warning", 5000);
+        }
+
+      }
+    </script>
+
+    <!--Create New Note Script-->
+    <script>
+      function newNote(title){
+        var new_note = document.createElement("section");
+        new_note.className = "note";
+
+        var datetime = new Date();
+        var datetime_string = datetime.toString();
+        new_note.title = "Created: "+datetime_string+"\nModified: "+datetime_string;
+
+        var settings = JSON.parse(document.getElementById("info-saver").textContent);
+        settings["id-counter"] += 1
+        document.getElementById("info-saver").textContent = JSON.stringify(settings);
+        new_note.id = "note"+settings["id-counter"];
+
+        var note_id = document.createElement("div");
+        note_id.className = "note-id";
+        note_id.textContent = settings["id-counter"];
+        note_id.title = "Note ID";
+        new_note.appendChild(note_id);
+        
+        var note_title = document.createElement("h1");
+        note_title.className = "title";
+        note_title.textContent = title;
+        new_note.appendChild(note_title);
+
+        var note_content = document.createElement("div");
+        note_content.className = "content";
+        note_content.textContent = "New Note Content";
+        new_note.appendChild(note_content);
+
+        var note_labels = document.createElement("div");
+        note_labels.className = "note-labels";
+        new_note.appendChild(note_labels);
+
+        var note_footer = document.createElement("div");
+        note_footer.className = "note-footer";
+        var edit_button = document.createElement("button");
+        edit_button.className = "action-button";
+        edit_button.textContent = "Start Editing Note";
+        edit_button.setAttribute("onclick", "editNote(this);");
+        note_footer.appendChild(edit_button);
+        var delete_button = document.createElement("button");
+        delete_button.className = "action-button delete";
+        delete_button.textContent = "Delete";
+        delete_button.setAttribute("onclick", "deleteNote(this);");
+        note_footer.appendChild(delete_button);
+        new_note.appendChild(note_footer);
+
+        document.getElementById("notes-list").prepend(new_note);
+        send_notif("Note Creation", "New note created, start editing with \"Start Editing Note\" button.", "success", 7000);
+
+      }
+    </script>
+
+    <!--Delete Note Script-->
+    <script>
+      function deleteNote(elem){
+        var ask_confirm = prompt("Confirm Note Deleting with \"yes, delete note\"");
+        if (ask_confirm == "yes, delete note"){
+          elem.parentElement.parentElement.remove();
+          checkLabels();
+          send_notif("Note Deleting", "Note Deleted successfuly.", "info", 5000);
+          send_notif("Save warning", "Some changed have been made make sure to save changes.", "warning", 5000);
+        }
+      }
+    </script>
+
+    <!--Notification Script-->
+    <script>
+
+      if (!document.getElementById("notif-list")){
+        var notif_list = document.createElement("div");
+        notif_list.id = "notif-list";
+        notif_list.className = "notif-list";
+        document.body.appendChild(notif_list);
+      }else{
+        var notif_list = document.getElementById("notif-list");
+      };
+
+      async function send_notif(title_text, text, mode, timeout){
+        // mode can be error, info, warning, success
+        var notification = document.createElement("div");
+        notification.className = "notification";
+        // title
+        var title = document.createElement("div");
+        title.className = "title";
+        title.textContent = title_text;
+        if (mode == "success"){
+          notification.style.borderLeft = "4px solid var(--theme-color-green)";
+        } else if (mode == "info"){
+          notification.style.borderLeft = "4px solid var(--theme-color-blue)";
+        } else if (mode == "warning"){
+          notification.style.borderLeft = "4px solid var(--theme-color-orange)";
+        } else if (mode == "error"){
+          notification.style.borderLeft = "4px solid var(--theme-color-red)";
+        }
+        notification.appendChild(title);
+        // text content
+        var text_content = document.createElement("div");
+        text_content.className = "text-content";
+        text_content.innerHTML = text;
+        notification.appendChild(text_content);
+        // appending notification to list
+        notif_list.appendChild(notification);
+        notification.onclick = function(){
+          notification.remove();
+        };
+        
+        var keep_shown = false;
+        notification.onmouseenter = function(){
+          keep_shown = true;
+        };
+        notification.onmouseleave = function(){
+          keep_shown = false;
+        };
+        await sleep(timeout);
+        while (keep_shown){
+            await sleep(1000);
+        };
+        try{
+          notification.remove();
+        }catch(err){};
+      };
+    </script>
+
+
+    <!--Conf And Profuncs-->
+    <script>
+      window.addEventListener('beforeunload', function (event) {
+        event.preventDefault();
+        event.returnValue = '';
+      });
+
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+    </script>
+
+  </body>
+</html>
