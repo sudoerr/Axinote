@@ -18,6 +18,9 @@ Every note has a number id and a title text as subject of note. 3 size of header
 
 The searching process is in advanced level :) you have two options when searching. The button near search input is for switching search mode, which can be * or +, * means (any used word in search input be in note, the note will be accepted) and + means (all used words in search input must be in note then note will be accepted)
 
+Saving note is the most important part, you can save note with the button on the header bar.
+
+
 ## Code Block
 ![code block](/docs/first%20node.jpg)
 
