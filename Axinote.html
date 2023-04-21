@@ -343,6 +343,7 @@ ul {
   text-align: center;
 }
 
+
 .main .labels-list{
   position: relative;
   display: flex;
@@ -373,6 +374,14 @@ ul {
 :root[data-theme="dark"] .main .labels-list .label{
   --theme-color-gray-40: rgb(62, 69, 75);
 }
+.main .labels-list .active-label{
+  color: white;
+  background-color: var(--theme-color-darkblue);
+}
+.main .labels-list .active-label:hover{
+  background-color: var(--theme-color-darkblue);
+}
+
 
 .main .note-list{
   display: block;
@@ -438,6 +447,7 @@ ul {
   overflow: hidden;
   color: var(--theme-text-color);
   unicode-bidi: plaintext;
+  font-size: 16px;
   text-align: start;
 }
 :root[data-theme="dark"] .main .note-list .note .content{
@@ -774,7 +784,7 @@ ul {
     </main>
 
     <footer class="footer">
-      <span>&copy;<a href="https://github.com/slashtony/slashnote"> 2022 Slash Note</a> <small>Version 1.4.7</small></span>
+      <span>&copy;<a href="https://github.com/slashtony/slashnote"> 2022 Slash Note</a> <small>Version 1.5.1</small></span>
     </footer>
 
     <!--Small Checks-->
@@ -782,6 +792,7 @@ ul {
       window.search_mode = "any used word"; // "all used words" or "any used word"
       var note_name = window.location.href.split("/").slice(-1).toString().split("#")[0];
       document.getElementsByClassName("note-title-text")[0].textContent = note_name;
+      var labels_search_list = [];
     </script>
 
 
@@ -841,19 +852,29 @@ ul {
         a.download = note_name;
         a.hidden = true;
         document.body.appendChild(a);
-        a.innerHTML = "something random - nobody will see this, it doesn't matter what you put here";
+        a.innerHTML = "#Freedom";
         a.click();
+        a.remove();
       }
     </script>
 
     <!--Search-->
     <script>
-      function labelToSearchInput(elem){
-        document.getElementById("searchInput").value = elem.textContent;
-        document.getElementById("searchInput").focus();
-        send_notif("search!", "Type a space to search label", "info", 5000);
+      function lookForLabelsInNote(noteLabelsTextContent){ // search needs
+        var score = 0;
+        for (let searchLabel of labels_search_list){
+          if (noteLabelsTextContent.indexOf(searchLabel) != -1){
+            score++;
+          }else{
+            score--;
+          }
+        }
+        if (score >= labels_search_list.length){
+          return true;
+        }else{
+          return false;
+        }
       }
-
       function search(){
         var value = document.getElementById("searchInput").value.trim();
         for (let note of document.getElementsByClassName("note")){
@@ -878,13 +899,13 @@ ul {
           }
           
           if (window.search_mode == "all used words"){
-            if (score == words.length){
-              note.style.display = "block";  
+            if (score == words.length && lookForLabelsInNote(note.getElementsByClassName("note-labels")[0].textContent)){
+              note.style.display = "block";
             }else{
             note.style.display = "none";
             }
           }else{
-            if (score > 0){
+            if (score > 0 && lookForLabelsInNote(note.getElementsByClassName("note-labels")[0].textContent)){
               note.style.display = "block";
             }else{
               note.style.display = "none";
@@ -932,8 +953,19 @@ ul {
           checkLabels();
         }
       }
+      function addLabelToSearch(elem){
+        if (elem.classList.contains("active-label") == false){
+          labels_search_list.push(elem.textContent);
+          elem.classList.add("active-label");
+        }else{
+          labels_search_list.pop(elem.textContent);
+          elem.classList.remove("active-label");
+        }
+        search();
+      }
 
       function checkLabels(){
+        labels_search_list = [];
         var labels = Array()
         for (let note of document.getElementsByClassName("note")){
           try{
@@ -956,7 +988,7 @@ ul {
             var label_elem = document.createElement("a");
             label_elem.className = "label";
             label_elem.textContent = "#"+label;
-            label_elem.setAttribute("onclick", "labelToSearchInput(this);");
+            label_elem.setAttribute("onclick", "addLabelToSearch(this);");
             document.getElementsByClassName("labels-list")[0].appendChild(label_elem);
           }
         }
